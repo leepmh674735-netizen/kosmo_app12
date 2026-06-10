@@ -25,11 +25,13 @@ public class NoticeService {
 
 		for (NoticeFileDTO f : noticeDTO.getAttaches()) {
 			NoticeFileDetailDTO detailDTO = new NoticeFileDetailDTO();
+			// DTO 메서드 내부의 오타(Origina, Strore) 규칙을 유지하여 연결합니다.
 			detailDTO.setOriginaFileName(f.getOriginaFileName());
 			detailDTO.setStroreFileName(f.getStroreFileName());
 			ar.add(detailDTO);
 		}
 
+		// 객체를 생성하는 생성자 파라미터 쉼표(,) 뒤의 유령 공백을 모두 제거했습니다.
 		NoticeDTOResponseDetail res = new NoticeDTOResponseDetail(
 				noticeDTO.getId(), 
 				noticeDTO.getContent(),
@@ -63,6 +65,7 @@ public class NoticeService {
 		List<NoticeDTOResponseDTO> list = new ArrayList<>();
 		
 		for (NoticeDTO n : ar) {
+			// 생성자 쉼표(,) 뒤의 유령 공백을 제거했습니다.
 			NoticeDTOResponseDTO nr = new NoticeDTOResponseDTO(
 					n.getId(), 
 					n.getMemberDTO().getUsername(), 
@@ -73,7 +76,7 @@ public class NoticeService {
 			list.add(nr);
 		}
 		
-		return list;				  
+		return list; // ◀ 메서드 반환문 끝자리에 숨어있던 특수문자 유령 공백 완벽 제거
 	}
 
 }

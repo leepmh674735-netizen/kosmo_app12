@@ -30,7 +30,7 @@ public class NoticeController {
 
 	@PostMapping("/add")
 	public NoticeDTO add(NoticeDTORequestDTO dto, @RequestParam(value = "attach", required = false) MultipartFile[] attach) throws Exception {
-		dto.setUsername("user2"); 
+		dto.setUsername("user2"); // ◀ 세미콜론 뒤에 붙어있던 보이지 않는 특수공백 오타 제거
 		return noticeService.add(dto, attach);
 	}
 
