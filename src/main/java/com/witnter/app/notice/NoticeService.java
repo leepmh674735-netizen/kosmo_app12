@@ -9,13 +9,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.witnter.app.members.MemberDTO;
 
-import lombok.AllArgsConstructor;
-
 @Service
-@AllArgsConstructor
 public class NoticeService {
 
 	private final NoticeRepository noticeRepository;
+
+	public NoticeService(NoticeRepository noticeRepository) {
+		this.noticeRepository = noticeRepository;
+	}
 
 	public NoticeDTOResponseDetail detail(Long id) throws Exception {
 		Optional<NoticeDTO> result = noticeRepository.findById(id);
@@ -25,9 +26,8 @@ public class NoticeService {
 
 		for (NoticeFileDTO f : noticeDTO.getAttaches()) {
 			NoticeFileDetailDTO detailDTO = new NoticeFileDetailDTO();
-			// DTO 메서드 내부의 오타(Origina, Strore) 규칙을 유지하여 연결합니다.
-			detailDTO.setOriginaFileName(f.getOriginaFileName());
-			detailDTO.setStroreFileName(f.getStroreFileName());
+			detailDTO.setOrignalFileName(f.getOriginaFileName());
+			detailDTO.setStoreFileName(f.getStroreFileName());
 			ar.add(detailDTO);
 		}
 
@@ -40,7 +40,7 @@ public class NoticeService {
 				noticeDTO.getTitle(), 
 				noticeDTO.getUpdatedAt(),
 				noticeDTO.getMemberDTO().getUsername(), 
-				noticeDTO.getView(), 
+				noticeDTO.getViews(), 
 				ar);
 
 		return res;
@@ -65,12 +65,11 @@ public class NoticeService {
 		List<NoticeDTOResponseDTO> list = new ArrayList<>();
 		
 		for (NoticeDTO n : ar) {
-			// 생성자 쉼표(,) 뒤의 유령 공백을 제거했습니다.
 			NoticeDTOResponseDTO nr = new NoticeDTOResponseDTO(
 					n.getId(), 
 					n.getMemberDTO().getUsername(), 
 					n.getTitle(), 
-					n.getView(), 
+					n.getViews(), 
 					n.getCreatedAt()
 			);
 			list.add(nr);

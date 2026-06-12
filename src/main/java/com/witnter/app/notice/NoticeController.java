@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.RequiredArgsConstructor;
-
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/notice")
 public class NoticeController {
 
 	private final NoticeService noticeService;
+
+	public NoticeController(NoticeService noticeService) {
+		this.noticeService = noticeService;
+	}
 
 	@GetMapping("/detail")
 	public NoticeDTOResponseDetail detail(@RequestParam("id") Long id) throws Exception {
@@ -30,7 +31,7 @@ public class NoticeController {
 
 	@PostMapping("/add")
 	public NoticeDTO add(NoticeDTORequestDTO dto, @RequestParam(value = "attach", required = false) MultipartFile[] attach) throws Exception {
-		dto.setUsername("user2"); // ◀ 세미콜론 뒤에 붙어있던 보이지 않는 특수공백 오타 제거
+		dto.setUsername("user2");
 		return noticeService.add(dto, attach);
 	}
 

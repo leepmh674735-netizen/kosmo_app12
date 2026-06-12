@@ -48,6 +48,9 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+springBoot {
+	mainClass = 'com.witnter.app.KosmoApplication'
+}
 eclipse {
     wtp {
         facet {
