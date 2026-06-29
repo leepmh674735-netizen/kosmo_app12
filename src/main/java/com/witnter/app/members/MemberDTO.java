@@ -52,7 +52,6 @@ public class MemberDTO implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-
         return true;
     }
 
