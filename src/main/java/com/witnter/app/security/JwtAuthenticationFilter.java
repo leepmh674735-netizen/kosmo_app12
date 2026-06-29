@@ -51,13 +51,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 		
-		// 1. jwtTokenManager 메소드 오타 수정 (createAcessToken -> createAccessToken)
+		
 		String accessToken = jwtTokenManager.createAccessToken(authResult);
 		String refreshToken = jwtTokenManager.createRefreshToken(authResult);
 
 		JwtAuthDTO jwtAuthDTO = new JwtAuthDTO();
 		jwtAuthDTO.setAccessToken(accessToken);
-		// 2. JwtAuthDTO 필드명 오타 수정 (setReferToken -> setRefreshToken)
+		
 		jwtAuthDTO.setRefreshToken(refreshToken); 
 		jwtAuthDTO.setUsername(authResult.getName());
 

@@ -31,7 +31,7 @@ public class NoticeService {
 			ar.add(detailDTO);
 		}
 
-		// 객체를 생성하는 생성자 파라미터 쉼표(,) 뒤의 유령 공백을 모두 제거했습니다.
+		
 		NoticeDTOResponseDetail res = new NoticeDTOResponseDetail(
 				noticeDTO.getId(), 
 				noticeDTO.getContent(),
@@ -75,7 +75,7 @@ public class NoticeService {
 			list.add(nr);
 		}
 		
-		return list; // ◀ 메서드 반환문 끝자리에 숨어있던 특수문자 유령 공백 완벽 제거
+		return list; 
 	}
 
 }
